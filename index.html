@@ -4,146 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VÉLF</title>
-<meta name="description" content="VÉLF（ヴェルフ）- 縁をかたちに。Confidence rooted in gratitude. ハンドメイドレザーグッズブランド。">
+<meta name="description" content="VÉLF（ヴェルフ）- 縁をかたちに。ハンドメイドレザーグッズブランド。">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<aside class="rail" aria-label="サイドナビゲーション">
-  <a href="contact.html">Contact</a>
-  <a href="about.html">About</a>
-  <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
-</aside>
-
 <header class="site-header">
+  <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
   <a class="brand" href="index.html" aria-label="VÉLF ホーム">
-    <img src="assets/img/logo_symbol.png" alt="" class="brand-mark">
     <span class="brand-name">V&Eacute;LF</span>
   </a>
-  <div class="currency">
-    <select id="currencySelect" aria-label="通貨切替">
-      <option value="JPY" selected>&yen; JPY</option>
-      <option value="USD">$ USD</option>
-    </select>
-  </div>
+  <span class="header-spacer" aria-hidden="true"></span>
 </header>
+
+<nav class="category-nav" aria-label="カテゴリ">
+  <a href="#belt">ベルト</a><span aria-hidden="true">/</span>
+  <a href="#wallet">ウォレット</a><span aria-hidden="true">/</span>
+  <a href="#case">ケース</a><span aria-hidden="true">/</span>
+  <a href="#komono">小物</a>
+</nav>
+
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<nav class="drawer" id="drawer" aria-label="メインメニュー" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="メニューを閉じる">&times;</button>
+  <a href="index.html">ホーム</a>
+  <a href="about.html">ブランドについて</a>
+  <a href="contact.html">お問い合わせ</a>
+  <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
+</nav>
 
 <main>
 
-  <section class="opening">
-    <img src="assets/img/logo_full.png" alt="VÉLF ロゴ" class="opening-logo">
-    <p class="opening-copy">縁をかたちに。</p>
-    <p class="opening-copy-en">Confidence rooted in gratitude.</p>
+  <section class="hero-band">
+    <img src="assets/img/logo_full.png" alt="VÉLF ロゴ" class="hero-logo">
+    <p class="hero-copy">縁をかたちに。</p>
   </section>
 
-  <section class="hero">
-    <img src="assets/img/hero_ride.jpg" alt="VÉLFのレザーポーチを身につけてバイクに乗る様子">
-  </section>
+  <section class="products">
 
-  <section class="products" id="products">
-    <h2 class="section-title">Products <span class="section-title-ja">製品</span></h2>
-    <ul class="grid">
-      <li class="card">
-        <a href="#" class="card-link">
+    <div class="category" id="belt">
+      <h2 class="category-title">ベルト</h2>
+      <ul class="grid">
+        <li class="card">
           <figure><img src="assets/img/belt_black.jpg" alt="レザーベルト 黒" loading="lazy"></figure>
-          <h3 class="card-name">LEATHER BELT</h3>
-          <p class="card-ja">レザーベルト</p>
-          <p class="card-price" data-jpy="18000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">レザーベルト</h3>
+          <p class="card-price">&yen;15,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
           <figure><img src="assets/img/belt_horseshoe.jpg" alt="蹄鉄バックルのレザーベルト" loading="lazy"></figure>
-          <h3 class="card-name">HORSESHOE BUCKLE BELT</h3>
-          <p class="card-ja">蹄鉄バックルベルト</p>
-          <p class="card-price" data-jpy="22000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">蹄鉄バックルベルト</h3>
+          <p class="card-price">&yen;19,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="category" id="wallet">
+      <h2 class="category-title">ウォレット</h2>
+      <ul class="grid">
+        <li class="card">
           <figure><img src="assets/img/trucker_wallet.jpg" alt="トラッカーウォレット 黒" loading="lazy"></figure>
-          <h3 class="card-name">TRUCKER WALLET</h3>
-          <p class="card-ja">トラッカーウォレット</p>
-          <p class="card-price" data-jpy="24000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">トラッカーウォレット</h3>
+          <p class="card-price">&yen;28,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
           <figure><img src="assets/img/star_wallet.jpg" alt="スタースタッズウォレット 黒" loading="lazy"></figure>
-          <h3 class="card-name">STAR STUDS WALLET</h3>
-          <p class="card-ja">スタースタッズウォレット</p>
-          <p class="card-price" data-jpy="26000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
-          <figure><img src="assets/img/waist_pouch.jpg" alt="レザーウエストポーチ ブラウン" loading="lazy"></figure>
-          <h3 class="card-name">WAIST POUCH</h3>
-          <p class="card-ja">ウエストポーチ</p>
-          <p class="card-price" data-jpy="16000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
-          <figure><img src="assets/img/watch_band.jpg" alt="レザーウォッチバンド ブラウン" loading="lazy"></figure>
-          <h3 class="card-name">WATCH BAND</h3>
-          <p class="card-ja">レザーウォッチバンド</p>
-          <p class="card-price" data-jpy="13000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
-          <figure><img src="assets/img/glasses_case_red.jpg" alt="メガネケース 赤" loading="lazy"></figure>
-          <h3 class="card-name">GLASSES CASE</h3>
-          <p class="card-ja">メガネケース</p>
-          <p class="card-price" data-jpy="12000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
-          <figure><img src="assets/img/flap_case.jpg" alt="フラップケース グレージュ" loading="lazy"></figure>
-          <h3 class="card-name">FLAP CASE</h3>
-          <p class="card-ja">フラップケース</p>
-          <p class="card-price" data-jpy="11000"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">スタースタッズウォレット</h3>
+          <p class="card-price">&yen;30,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="category" id="case">
+      <h2 class="category-title">ケース</h2>
+      <ul class="grid">
+        <li class="card">
           <figure><img src="assets/img/key_case.jpg" alt="キーケース 黒×真鍮" loading="lazy"></figure>
-          <h3 class="card-name">KEY CASE</h3>
-          <p class="card-ja">キーケース</p>
-          <p class="card-price" data-jpy="9800"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
-          <figure><img src="assets/img/bag_charm.jpg" alt="ミニバッグチャーム" loading="lazy"></figure>
-          <h3 class="card-name">MINI BAG CHARM</h3>
-          <p class="card-ja">ミニバッグチャーム</p>
-          <p class="card-price" data-jpy="8800"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">キーケース</h3>
+          <p class="card-price">&yen;8,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
           <figure><img src="assets/img/card_case.jpg" alt="カードケース ネイビー×マスタード" loading="lazy"></figure>
-          <h3 class="card-name">CARD CASE</h3>
-          <p class="card-ja">カードケース</p>
-          <p class="card-price" data-jpy="7800"></p>
-        </a>
-      </li>
-      <li class="card">
-        <a href="#" class="card-link">
+          <h3 class="card-name">カードケース</h3>
+          <p class="card-price">&yen;6,500</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
+          <figure><img src="assets/img/glasses_case_red.jpg" alt="メガネケース 赤" loading="lazy"></figure>
+          <h3 class="card-name">メガネケース</h3>
+          <p class="card-price">&yen;9,500</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
+          <figure><img src="assets/img/flap_case.jpg" alt="フラップケース グレージュ" loading="lazy"></figure>
+          <h3 class="card-name">フラップケース</h3>
+          <p class="card-price">&yen;8,500</p>
+          <p class="card-status">受注製作</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="category" id="komono">
+      <h2 class="category-title">小物</h2>
+      <ul class="grid">
+        <li class="card">
+          <figure><img src="assets/img/waist_pouch.jpg" alt="レザーウエストポーチ ブラウン" loading="lazy"></figure>
+          <h3 class="card-name">ウエストポーチ</h3>
+          <p class="card-price">&yen;20,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
+          <figure><img src="assets/img/watch_band.jpg" alt="レザーウォッチバンド ブラウン" loading="lazy"></figure>
+          <h3 class="card-name">ウォッチバンド</h3>
+          <p class="card-price">&yen;12,000</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
+          <figure><img src="assets/img/bag_charm.jpg" alt="ミニバッグチャーム" loading="lazy"></figure>
+          <h3 class="card-name">ミニバッグチャーム</h3>
+          <p class="card-price">&yen;5,500</p>
+          <p class="card-status">受注製作</p>
+        </li>
+        <li class="card">
           <figure><img src="assets/img/leather_sleeve.jpg" alt="レザースリーブ ブラウン・イエロー" loading="lazy"></figure>
-          <h3 class="card-name">LEATHER SLEEVE</h3>
-          <p class="card-ja">レザースリーブ</p>
-          <p class="card-price" data-jpy="6800"></p>
-        </a>
-      </li>
-    </ul>
+          <h3 class="card-name">レザースリーブ</h3>
+          <p class="card-price">&yen;4,500</p>
+          <p class="card-status">受注製作</p>
+        </li>
+      </ul>
+    </div>
+
     <p class="products-note">すべて一点ずつの手縫い仕立てのため、受注製作にて承ります。</p>
   </section>
 
@@ -161,9 +161,9 @@
 <footer class="site-footer">
   <img src="assets/img/logo_symbol.png" alt="" class="footer-mark">
   <nav class="footer-nav" aria-label="フッターナビゲーション">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html">ホーム</a>
+    <a href="about.html">ブランドについて</a>
+    <a href="contact.html">お問い合わせ</a>
     <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
   </nav>
   <p class="copyright">&copy; 2026 V&Eacute;LF</p>

@@ -1,30 +1,33 @@
-// 通貨切替（JPY / USD）
-const RATE_USD = 150; // 1 USD = 150 JPY（固定レート・目安表示）
+// ドロワー開閉
+const menuBtn = document.getElementById('menuBtn');
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('drawerOverlay');
+const closeBtn = document.getElementById('drawerClose');
 
-const select = document.getElementById('currencySelect');
-const prices = document.querySelectorAll('.card-price[data-jpy]');
-
-function formatPrice(jpy, currency) {
-  if (currency === 'USD') {
-    const usd = jpy / RATE_USD;
-    return '$' + usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  }
-  return '¥' + jpy.toLocaleString('ja-JP');
-}
-
-function render(currency) {
-  prices.forEach(function (el) {
-    el.textContent = formatPrice(Number(el.dataset.jpy), currency);
+function openDrawer() {
+  overlay.hidden = false;
+  requestAnimationFrame(function () {
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
   });
+  drawer.setAttribute('aria-hidden', 'false');
+  menuBtn.setAttribute('aria-expanded', 'true');
 }
 
-if (select) {
-  const saved = localStorage.getItem('velf-currency') || 'JPY';
-  select.value = saved;
-  render(saved);
-  select.addEventListener('change', function () {
-    localStorage.setItem('velf-currency', select.value);
-    render(select.value);
+function closeDrawer() {
+  drawer.classList.remove('is-open');
+  overlay.classList.remove('is-open');
+  drawer.setAttribute('aria-hidden', 'true');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  setTimeout(function () { overlay.hidden = true; }, 300);
+}
+
+if (menuBtn && drawer && overlay && closeBtn) {
+  menuBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
   });
 }
 
@@ -33,7 +36,7 @@ const cards = document.querySelectorAll('.card');
 if ('IntersectionObserver' in window && cards.length) {
   const observer = new IntersectionObserver(
     function (entries) {
-      entries.forEach(function (entry, i) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.style.transitionDelay = (entry.target.dataset.delay || 0) + 'ms';
           entry.target.classList.add('is-visible');
@@ -44,7 +47,7 @@ if ('IntersectionObserver' in window && cards.length) {
     { threshold: 0.15 }
   );
   cards.forEach(function (card, i) {
-    card.dataset.delay = (i % 3) * 120;
+    card.dataset.delay = (i % 4) * 100;
     observer.observe(card);
   });
 } else {

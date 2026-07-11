@@ -3,34 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About | VÉLF</title>
-<meta name="description" content="VÉLF（ヴェルフ）について。縁をかたちに。Confidence rooted in gratitude.">
+<title>ブランドについて | VÉLF</title>
+<meta name="description" content="VÉLF（ヴェルフ）について。縁をかたちに。">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<aside class="rail" aria-label="サイドナビゲーション">
-  <a href="contact.html">Contact</a>
-  <a href="about.html">About</a>
-  <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
-</aside>
-
 <header class="site-header">
+  <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
   <a class="brand" href="index.html" aria-label="VÉLF ホーム">
-    <img src="assets/img/logo_symbol.png" alt="" class="brand-mark">
     <span class="brand-name">V&Eacute;LF</span>
   </a>
+  <span class="header-spacer" aria-hidden="true"></span>
 </header>
+
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<nav class="drawer" id="drawer" aria-label="メインメニュー" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="メニューを閉じる">&times;</button>
+  <a href="index.html">ホーム</a>
+  <a href="about.html">ブランドについて</a>
+  <a href="contact.html">お問い合わせ</a>
+  <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
+</nav>
 
 <main>
   <section class="page">
-    <h1 class="page-title">About</h1>
+    <h1 class="page-title">ブランドについて</h1>
     <p class="page-statement">縁をかたちに。</p>
-    <p class="page-statement-en">Confidence rooted in gratitude.</p>
     <div class="page-body">
       <p>VÉLF（ヴェルフ）は、ハンドメイドのレザーグッズブランドです。</p>
       <p>ベルト、ウォレット、キーケース、メガネケース。ひとつひとつを手縫いで仕立て、使う人とともに時間を重ねていく革製品をつくっています。</p>
@@ -44,13 +49,14 @@
 <footer class="site-footer">
   <img src="assets/img/logo_symbol.png" alt="" class="footer-mark">
   <nav class="footer-nav" aria-label="フッターナビゲーション">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html">ホーム</a>
+    <a href="about.html">ブランドについて</a>
+    <a href="contact.html">お問い合わせ</a>
     <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
   </nav>
   <p class="copyright">&copy; 2026 V&Eacute;LF</p>
 </footer>
 
+<script src="js/main.js"></script>
 </body>
 </html>
