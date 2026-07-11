@@ -30,6 +30,45 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
+/* ---- splash (ロード時のロゴ刻印) ---- */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: splashOut 0.6s ease 1.7s both;
+}
+.splash img {
+  width: min(420px, 70vw);
+  animation: stampIn 0.65s cubic-bezier(0.16, 1.1, 0.3, 1.3) 0.15s both;
+}
+@keyframes splashOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* ---- toast ---- */
+.toast[hidden] { display: none; }
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  padding: 0.9rem 1.6rem;
+  max-width: min(90vw, 480px);
+  text-align: center;
+  animation: fadeUp 0.3s ease both;
+}
+
 /* ---- header ---- */
 .site-header {
   position: sticky;
@@ -204,6 +243,12 @@ ul { list-style: none; }
   font-weight: 500;
   letter-spacing: 0.5em;
   margin-right: -0.5em;
+}
+.tagline-script {
+  display: block;
+  width: min(460px, 80vw);
+  margin: 1.8rem auto 0;
+  opacity: 0.9;
 }
 .launch-date {
   margin-top: 1.2rem;
@@ -430,8 +475,14 @@ ul { list-style: none; }
   .site-header { padding: 1rem 1.2rem; }
   .brand-name { font-size: 19px; }
   .category-nav { gap: 0.4rem 1rem; font-size: 13px; letter-spacing: 0.2em; }
-  .hero-video video { height: 62vh; }
-  .stamp-overlay img { width: 74vw; }
+  .hero-video { background: #000; }
+  .hero-video video {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+  .hero-hint { bottom: 0.7rem; font-size: 10px; }
+  .stamp-overlay img { width: 60vw; }
   .tagline { padding: 3.5rem 1.2rem 0; }
   .tagline-copy { font-size: 17px; }
   .products { padding: 3.5rem 1.2rem 2.5rem; }
