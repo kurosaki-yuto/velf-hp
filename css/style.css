@@ -23,6 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-wrap: break-word;
   line-break: strict;
+  overflow-x: clip;
 }
 
 img { max-width: 100%; display: block; }
@@ -72,9 +73,10 @@ ul { list-style: none; }
 /* ---- category nav ---- */
 .category-nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1.6rem;
+  gap: 0.6rem 1.6rem;
   padding: 1rem;
   font-size: 14px;
   font-weight: 500;
@@ -131,44 +133,97 @@ ul { list-style: none; }
   cursor: pointer;
 }
 
-/* ---- hero band ---- */
-.hero-band {
-  background: var(--band);
+/* ---- hero video ---- */
+.hero-video {
+  position: relative;
+  width: 100%;
+  background: #000;
+  cursor: pointer;
+}
+.hero-video video {
+  width: 100%;
+  height: min(88vh, 820px);
+  object-fit: cover;
+  display: block;
+}
+.hero-hint {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  margin-right: -0.35em;
+  opacity: 0.7;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.stamp-overlay[hidden] { display: none; }
+.stamp-overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6rem 2rem;
+  background: rgba(255, 255, 255, 0.94);
+  animation: flashIn 0.25s ease both;
 }
-.hero-logo {
-  width: min(280px, 58vw);
-  filter: invert(1);
-  mix-blend-mode: screen;
-  animation: fadeUp 1.2s ease both;
+.stamp-overlay img {
+  width: min(440px, 68vw);
+  animation: stampIn 0.6s cubic-bezier(0.16, 1.1, 0.3, 1.3) both;
 }
-.hero-copy {
-  margin-top: 2.6rem;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.55em;
-  margin-right: -0.55em;
-  animation: fadeUp 1.2s ease 0.3s both;
+@keyframes flashIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-.hero-cta {
-  margin-top: 3rem;
+@keyframes stampIn {
+  0% { transform: scale(2.8); opacity: 0; }
+  50% { transform: scale(0.94); opacity: 1; }
+  68% { transform: scale(1.06); }
+  82% { transform: scale(0.99); }
+  100% { transform: scale(1); }
+}
+
+/* ---- tagline ---- */
+.tagline {
+  text-align: center;
+  padding: 4.5rem 1.5rem 0;
+}
+.coming-soon {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 0.35em;
+  margin-right: -0.35em;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+}
+.tagline-copy {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+}
+.launch-date {
+  margin-top: 1.2rem;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  margin-right: -0.25em;
+}
+.tagline-cta {
   display: inline-block;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 0.85rem 3.2rem;
+  margin-top: 1.8rem;
+  border: 1px solid var(--ink);
+  padding: 0.8rem 3rem;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.3em;
   margin-right: -0.3em;
   transition: background 0.3s ease, color 0.3s ease;
-  animation: fadeUp 1.2s ease 0.5s both;
 }
-.hero-cta:hover { background: #ffffff; color: var(--ink); }
+.tagline-cta:hover { background: var(--ink); color: #ffffff; }
 
 /* ---- products ---- */
 .products {
@@ -284,18 +339,6 @@ ul { list-style: none; }
 }
 .order-btn:hover { opacity: 0.75; }
 
-/* ---- ad video ---- */
-.ad-video {
-  background: var(--band);
-  padding: 5rem 1.5rem;
-  display: flex;
-  justify-content: center;
-}
-.ad-video video {
-  width: min(880px, 100%);
-  display: block;
-}
-
 /* ---- footer ---- */
 .site-footer {
   text-align: center;
@@ -386,14 +429,18 @@ ul { list-style: none; }
 @media (max-width: 640px) {
   .site-header { padding: 1rem 1.2rem; }
   .brand-name { font-size: 19px; }
-  .category-nav { gap: 1rem; font-size: 13px; letter-spacing: 0.2em; }
-  .hero-band { padding: 4.5rem 1.5rem; }
-  .hero-copy { font-size: 16px; }
+  .category-nav { gap: 0.4rem 1rem; font-size: 13px; letter-spacing: 0.2em; }
+  .hero-video video { height: 62vh; }
+  .stamp-overlay img { width: 74vw; }
+  .tagline { padding: 3.5rem 1.2rem 0; }
+  .tagline-copy { font-size: 17px; }
   .products { padding: 3.5rem 1.2rem 2.5rem; }
   .category-title { font-size: 17px; }
+  .grid { gap: 2.2rem 0.9rem; }
+  .card-name { font-size: 14px; }
+  .card-price { font-size: 14px; }
   .editorial { grid-template-columns: 1fr; }
   .editorial-item img { height: 52vh; }
   .order { padding: 4.5rem 1.2rem; }
   .order-btn { padding: 1rem 2.6rem; }
-  .ad-video { padding: 3rem 1rem; }
 }

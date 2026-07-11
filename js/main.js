@@ -1,3 +1,7 @@
+// リロード時は常に最上部から
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // ドロワー開閉
 const menuBtn = document.getElementById('menuBtn');
 const drawer = document.getElementById('drawer');
@@ -28,6 +32,30 @@ if (menuBtn && drawer && overlay && closeBtn) {
   overlay.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+  });
+}
+
+// ヒーロー動画クリックでロゴ刻印アニメーション
+const heroVideo = document.getElementById('heroVideo');
+const stampOverlay = document.getElementById('stampOverlay');
+let stampTimer = null;
+
+if (heroVideo && stampOverlay) {
+  heroVideo.addEventListener('click', function () {
+    if (!stampOverlay.hidden) {
+      stampOverlay.hidden = true;
+      clearTimeout(stampTimer);
+      return;
+    }
+    stampOverlay.hidden = false;
+    const img = stampOverlay.querySelector('img');
+    stampOverlay.style.animation = 'none';
+    img.style.animation = 'none';
+    void img.offsetWidth;
+    stampOverlay.style.animation = '';
+    img.style.animation = '';
+    clearTimeout(stampTimer);
+    stampTimer = setTimeout(function () { stampOverlay.hidden = true; }, 2800);
   });
 }
 
