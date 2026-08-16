@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>オーダーをつくる | VÉLF</title>
-<meta name="description" content="VÉLF（ヴェルフ）のオーダーシミュレーション。革・色・幅・バックル・ステッチを選んで、あなたの一本を組み立てます。">
+<meta name="description" content="VÉLF（ヴェルフ）のオーダーシミュレーション。製品を選び、革を選び、仕様を決めて相談まで。">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,76 +44,82 @@
     <p class="order-eyebrow">Order Simulation</p>
     <h1 class="order-h1">オーダーをつくる</h1>
     <p class="order-lead">
-      革、色、幅、バックル、糸。<br>
-      選んだ組み合わせが、そのまま一本の仕様書になります。
+      製品を選び、革を選ぶ。<br>
+      決めた組み合わせが、そのまま一点の仕様書になります。
     </p>
   </section>
 
-  <div class="builder">
+  <ol class="steps" id="steps">
+    <li class="step is-current" data-step="1"><span>1</span>商品を選ぶ</li>
+    <li class="step" data-step="2"><span>2</span>革を選ぶ</li>
+    <li class="step" data-step="3"><span>3</span>決定する</li>
+  </ol>
 
-    <div class="builder-preview">
-      <div class="preview-sticky">
-        <svg class="belt-svg" viewBox="0 0 900 280" role="img" aria-labelledby="beltSvgTitle">
-          <title id="beltSvgTitle">選んだ仕様のベルト図</title>
+  <!-- ステップ1: 商品 -->
+  <section class="panel is-active" id="panel1" aria-label="商品を選ぶ">
+    <div class="product-grid" id="productGrid"></div>
+  </section>
 
-          <!-- 本体（ベルト） -->
-          <g id="strapGroup">
-            <path id="strapBody" d="" fill="var(--leather)"></path>
-            <path id="strapShade" d="" fill="rgba(0,0,0,0.16)"></path>
-            <path id="strapStitchTop" d="" fill="none" stroke="var(--stitch)" stroke-width="2.4"
-                  stroke-dasharray="9 7" stroke-linecap="round"></path>
-            <path id="strapStitchBottom" d="" fill="none" stroke="var(--stitch)" stroke-width="2.4"
-                  stroke-dasharray="9 7" stroke-linecap="round"></path>
-            <g id="holes" fill="rgba(0,0,0,0.55)"></g>
-          </g>
+  <!-- ステップ2: 革と仕様 -->
+  <section class="panel" id="panel2" aria-label="革を選ぶ" hidden>
+    <div class="builder">
+      <div class="builder-preview">
+        <div class="preview-sticky">
+          <figure class="preview-frame">
+            <img id="previewImg" src="" alt="">
+          </figure>
+          <p class="preview-caption" id="previewCaption"></p>
+          <p class="preview-note">
+            色は再現イメージです。革は天然素材のため、同じ色でも一枚ごとに表情が変わります。
+            実物の色味は、ご相談のときに革のサンプルでお見せします。
+          </p>
+        </div>
+      </div>
+      <div class="builder-controls" id="builderControls"></div>
+    </div>
+    <div class="panel-actions">
+      <button type="button" class="btn-ghost" data-goto="1">商品を選び直す</button>
+      <button type="button" class="btn-solid" data-goto="3">この内容で決定する</button>
+    </div>
+  </section>
 
-          <!-- 剣先の折り返し部分 -->
-          <g id="keeperGroup">
-            <rect id="keeper" rx="3" fill="var(--leather)" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"></rect>
-          </g>
+  <!-- ステップ3: 確認 -->
+  <section class="panel" id="panel3" aria-label="決定する" hidden>
+    <div class="confirm">
+      <figure class="confirm-img"><img id="confirmImg" src="" alt=""></figure>
 
-          <!-- バックル -->
-          <g id="buckleGroup">
-            <rect id="buckleFrame" rx="6" fill="none" stroke="var(--buckle)" stroke-width="14"></rect>
-            <rect id="bucklePin" fill="var(--buckle)"></rect>
-            <path id="buckleTongue" fill="var(--buckle)"></path>
-          </g>
-        </svg>
+      <h2 class="spec-title">この仕様でお作りします</h2>
+      <dl class="spec-list" id="specList"></dl>
 
-        <p class="preview-note">
-          実物の色味・質感を再現した画像ではありません。仕様を確かめるための図です。<br>
-          革は天然素材のため、同じ色でも一枚ごとに表情が変わります。
-        </p>
+      <div class="field confirm-note-field">
+        <label for="orderNote">ご希望・ご相談（任意）</label>
+        <textarea id="orderNote" rows="3" placeholder="例：左利きなので向きを変えたい／プレゼント用に包んでほしい"></textarea>
+      </div>
+
+      <div class="spec-price">
+        <span class="spec-price-label">参考価格</span>
+        <span class="spec-price-value" id="specPrice">&yen;0</span>
+      </div>
+      <p class="spec-price-note">
+        価格は仮のものです。革の状態やサイズによって変わるため、確定金額はご相談のうえでお出しします。
+      </p>
+
+      <div class="spec-flow">
+        <ol>
+          <li><span>1</span>この仕様でご相談ください</li>
+          <li><span>2</span>オンラインで15分ほど、仕様とサイズをすり合わせます</li>
+          <li><span>3</span>内容が固まったら、お見積りとお支払いのご案内をお送りします</li>
+          <li><span>4</span>製作に入ります</li>
+        </ol>
+      </div>
+
+      <button type="button" class="spec-cta" id="specCta">この仕様で相談する</button>
+      <p class="spec-cta-note">Instagram の DM が開きます。仕様書は自動でコピーされるので、貼り付けて送ってください。</p>
+
+      <div class="panel-actions">
+        <button type="button" class="btn-ghost" data-goto="2">仕様を直す</button>
       </div>
     </div>
-
-    <div class="builder-controls" id="builderControls"></div>
-
-  </div>
-
-  <section class="spec" id="spec">
-    <h2 class="spec-title">あなたの仕様</h2>
-    <dl class="spec-list" id="specList"></dl>
-
-    <div class="spec-price">
-      <span class="spec-price-label">参考価格</span>
-      <span class="spec-price-value" id="specPrice">&yen;15,000</span>
-    </div>
-    <p class="spec-price-note">
-      価格は仮のものです。サイズや革の状態によって変わるため、確定金額はご相談のうえでお出しします。
-    </p>
-
-    <div class="spec-flow">
-      <ol>
-        <li><span>1</span>この仕様でご相談ください</li>
-        <li><span>2</span>オンラインで15分ほど、仕様とサイズをすり合わせます</li>
-        <li><span>3</span>内容が固まったら、お見積りとお支払いのご案内をお送りします</li>
-        <li><span>4</span>製作に入ります</li>
-      </ol>
-    </div>
-
-    <button type="button" class="spec-cta" id="specCta">この仕様で相談する</button>
-    <p class="spec-cta-note">Instagram の DM が開きます。仕様書は自動でコピーされるので、貼り付けて送ってください。</p>
   </section>
 
 </main>
