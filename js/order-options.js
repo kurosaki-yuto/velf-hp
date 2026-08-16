@@ -1,7 +1,7 @@
 /* =========================================================================
    オーダーシミュレーターの中身。
-   【要確認】その他の色を選んだときの追加費用は未定。若林さんに確認して
-   OTHER_COLOR_NOTE と add の値を入れる。
+   【要確認】その他の色を選んだときの追加料金は未定。金額が決まったら
+   その他の選択肢の add に入れる。
    ========================================================================= */
 
 window.ORDER = {
@@ -10,8 +10,7 @@ window.ORDER = {
     { id: 'black', label: 'ブラック', chip: '#1c1c1c', add: 0 },
     { id: 'darkbrown', label: 'ダークブラウン', chip: '#3f2a1b', add: 0 },
     { id: 'natural', label: 'ナチュラル', chip: '#d8b483', add: 0 },
-    { id: 'other', label: 'その他の色', chip: 'other', add: 0,
-      desc: '上記以外の色をご希望の場合、革の取り寄せが必要になるため別途費用をいただきます。ご相談ください。' }
+    { id: 'other', label: 'その他の色', chip: 'other', add: 0, other: true }
   ],
 
   // 全製品に共通で選べるもの
@@ -25,8 +24,7 @@ window.ORDER = {
         { id: 'natural', label: 'きなり', chip: '#e6dcc8', add: 0 },
         { id: 'turquoise', label: 'ターコイズブルー', chip: '#3aa6b9', add: 0 },
         { id: 'darkbrown', label: 'ダークブラウン', chip: '#3f2a1b', add: 0 },
-        { id: 'other', label: 'その他の色', chip: 'other', add: 0,
-          desc: '上記以外の色をご希望の場合、糸の取り寄せが必要になるため別途費用をいただきます。ご相談ください。' }
+        { id: 'other', label: 'その他の色', chip: 'other', add: 0, other: true }
       ]
     }
   ],

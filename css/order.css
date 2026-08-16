@@ -452,3 +452,32 @@
 .swatch-chip.is-other {
   background: conic-gradient(#1c1c1c, #3f2a1b, #8e2230, #3aa6b9, #d8b483, #1c1c1c);
 }
+
+/* 「その他の色」を選んだときだけ出す入力欄 */
+.other-field { display: none; margin-top: 0.9rem; }
+.other-field.is-open { display: block; }
+.other-field label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+.other-field input {
+  width: 100%;
+  max-width: 320px;
+  font-family: var(--gothic);
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 0.5rem 0.1rem;
+}
+.other-field input:focus { outline: none; border-bottom-color: var(--ink); }
+.other-fee {
+  font-size: 12px;
+  color: var(--ink);
+  margin-top: 0.5rem;
+}

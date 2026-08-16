@@ -44,7 +44,14 @@ function showToast(message) {
 
 // ---- 状態 ----
 const DATA = window.ORDER;
-const state = { product: null, color: 'black', size: '', note: '', choices: {} };
+const state = {
+  product: null,
+  color: 'black',
+  // 「その他の色」を選んでも写真は直前の色のまま出す
+  previewColor: 'black',
+  otherText: {},
+  size: '', note: '', choices: {}
+};
 
 function product() {
   return DATA.products.find(function (p) { return p.id === state.product; });
@@ -64,9 +71,24 @@ function colorObj() {
 }
 
 function variantSrc(productId, colorId) {
-  // 「その他の色」は見本を用意できないので、ナチュラルの写真を借りて表示する
-  const c = colorId === 'other' ? 'natural' : colorId;
-  return 'assets/img/variants/' + productId + '_' + c + '.jpg';
+  return 'assets/img/variants/' + productId + '_' + colorId + '.jpg';
+}
+
+// 「その他」を選んだ項目に、希望の色を書いてもらう欄を足す
+function otherField(key, onInput) {
+  const box = document.createElement('div');
+  box.className = 'other-field';
+  box.innerHTML =
+    '<label for="other-' + key + '">何色にしたいか入力してください</label>' +
+    '<input type="text" id="other-' + key + '" maxlength="40" autocomplete="off">' +
+    '<p class="other-fee">追加料金が必要です</p>';
+  const input = box.querySelector('input');
+  input.value = state.otherText[key] || '';
+  input.addEventListener('input', function () {
+    state.otherText[key] = this.value.trim();
+    if (onInput) onInput();
+  });
+  return box;
 }
 
 // ---- ステップ制御 ----
@@ -118,6 +140,7 @@ function selectProduct(id) {
   state.size = '';
   state.note = '';
   state.choices = {};
+  state.otherText = {};
   groups().forEach(function (g) { state.choices[g.key] = g.options[0].id; });
   buildControls();
   renderPreview();
@@ -175,6 +198,7 @@ function buildControls() {
       '<span class="swatch-label">' + c.label + '</span>';
     btn.addEventListener('click', function () {
       state.color = c.id;
+      if (c.id !== 'other') state.previewColor = c.id;
       colorList.querySelectorAll('.swatch').forEach(function (b) {
         b.classList.remove('is-active');
         b.setAttribute('aria-checked', 'false');
@@ -186,10 +210,9 @@ function buildControls() {
     colorList.appendChild(btn);
   });
   colorBlock.appendChild(colorList);
-  const colorDesc = document.createElement('p');
-  colorDesc.className = 'ctrl-desc';
-  colorDesc.id = 'colorDesc';
-  colorBlock.appendChild(colorDesc);
+  const colorOther = otherField('color');
+  colorOther.id = 'colorOther';
+  colorBlock.appendChild(colorOther);
   wrap.appendChild(colorBlock);
 
   // 共通 + 製品ごとの選択肢
@@ -223,6 +246,10 @@ function buildControls() {
       list.appendChild(btn);
     });
     block.appendChild(list);
+
+    const other = otherField(group.key);
+    other.dataset.otherFor = group.key;
+    block.appendChild(other);
 
     const desc = document.createElement('p');
     desc.className = 'ctrl-desc';
@@ -261,16 +288,20 @@ function renderPreview() {
     caption.textContent = product().name +
       '（' + colorObj().label + 'の写真は準備中のため、既存の写真を表示しています）';
   };
-  img.src = variantSrc(state.product, state.color);
-  img.alt = product().name + ' ' + colorObj().label;
-  caption.textContent = state.color === 'other'
-    ? product().name + ' / その他の色（写真はナチュラルです）'
-    : product().name + ' / ' + colorObj().label;
+  img.src = variantSrc(state.product, state.previewColor);
+  img.alt = product().name;
+  caption.textContent = product().name;
 
   const cv = document.getElementById('colorValue');
   if (cv) cv.textContent = colorObj().label;
-  const cd = document.getElementById('colorDesc');
-  if (cd) cd.textContent = colorObj().desc || '';
+
+  // 「その他」を選んでいる項目だけ、入力欄を出す
+  const co = document.getElementById('colorOther');
+  if (co) co.classList.toggle('is-open', state.color === 'other');
+  groups().forEach(function (g) {
+    const box = document.querySelector('[data-other-for="' + g.key + '"]');
+    if (box) box.classList.toggle('is-open', chosen(g.key).other === true);
+  });
 
   groups().forEach(function (g) {
     const el = document.querySelector('[data-value-for="' + g.key + '"]');
@@ -305,9 +336,16 @@ function renderConfirm() {
     list.appendChild(el);
   }
 
+  function withOther(key, label) {
+    if (!state.otherText[key]) return label + '（追加料金）';
+    return state.otherText[key] + '（その他の色・追加料金）';
+  }
   row('製品', product().name);
-  row('色', colorObj().label + (state.color === 'other' ? '（別途費用）' : ''));
-  groups().forEach(function (g) { row(g.label, chosen(g.key).label); });
+  row('色', state.color === 'other' ? withOther('color', 'その他の色') : colorObj().label);
+  groups().forEach(function (g) {
+    const o = chosen(g.key);
+    row(g.label, o.other ? withOther(g.key, o.label) : o.label);
+  });
   if (product().size) {
     row(product().size.label, state.size ? state.size + ' ' + product().size.unit : '相談して決める');
   }
@@ -321,10 +359,14 @@ document.getElementById('orderNote').addEventListener('input', function () {
 
 function specText() {
   const lines = ['VÉLF「' + product().name + '」のオーダーで相談したいです。', ''];
-  lines.push('色：' + colorObj().label + (state.color === 'other' ? '（別途費用の相談あり）' : ''));
+  function otherLabel(key, fallback) {
+    return (state.otherText[key] || fallback) + '（その他の色・追加料金）';
+  }
+  lines.push('色：' + (state.color === 'other'
+    ? otherLabel('color', '色は相談したい') : colorObj().label));
   groups().forEach(function (g) {
     const o = chosen(g.key);
-    lines.push(g.label + '：' + o.label + (o.id === 'other' ? '（別途費用の相談あり）' : ''));
+    lines.push(g.label + '：' + (o.other ? otherLabel(g.key, '色は相談したい') : o.label));
   });
   if (product().size) {
     lines.push(product().size.label + '：' +
