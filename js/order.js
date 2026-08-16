@@ -363,6 +363,11 @@ function renderBuyButton() {
 
   const links = window.PAYMENT_LINKS || {};
   const url = links[state.product];
+  if (!window.SHOW_BUY_BUTTON) {
+    buy.hidden = true;
+    note.hidden = true;
+    return;
+  }
   const hasOther = state.color === 'other' ||
     groups().some(function (g) { return chosen(g.key).other === true; });
 

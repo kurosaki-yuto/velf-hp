@@ -74,7 +74,7 @@ window.ORDER = {
     { id: 'card_case', name: 'カードケース', base: 3980, cat: 'ケース' },
     { id: 'glasses_case_red', name: 'メガネケース', base: 5000, cat: 'ケース' },
     { id: 'waist_pouch', name: 'ウエストポーチ', base: 4000, cat: '小物' },
-    { id: 'watch_band', name: 'ウォッチバンド', base: 12000, cat: '小物',
+    { id: 'watch_band', name: 'ウォッチバンド', base: 4000, cat: '小物',
       size: { label: 'ラグ幅', unit: 'mm', placeholder: '例：20', min: 12, max: 30,
               note: '時計側の取り付け幅。分からなければ機種名をご相談時にお知らせください。' } },
     { id: 'leather_sleeve', name: 'レザースリーブ', base: 2500, cat: '小物' }
