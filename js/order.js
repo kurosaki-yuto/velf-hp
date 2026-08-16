@@ -64,7 +64,9 @@ function colorObj() {
 }
 
 function variantSrc(productId, colorId) {
-  return 'assets/img/variants/' + productId + '_' + colorId + '.jpg';
+  // 「その他の色」は見本を用意できないので、ナチュラルの写真を借りて表示する
+  const c = colorId === 'other' ? 'natural' : colorId;
+  return 'assets/img/variants/' + productId + '_' + c + '.jpg';
 }
 
 // ---- ステップ制御 ----
@@ -133,8 +135,10 @@ function swatchButton(group, opt, onPick) {
 
   if (opt.chip) {
     const chip = document.createElement('span');
-    chip.className = 'swatch-chip' + (opt.chip === 'transparent' ? ' is-none' : '');
-    chip.style.background = opt.chip;
+    chip.className = 'swatch-chip' +
+      (opt.chip === 'transparent' ? ' is-none' : '') +
+      (opt.chip === 'other' ? ' is-other' : '');
+    if (opt.chip !== 'other') chip.style.background = opt.chip;
     btn.appendChild(chip);
   }
   const label = document.createElement('span');
@@ -165,7 +169,9 @@ function buildControls() {
     btn.className = 'swatch' + (c.id === state.color ? ' is-active' : '');
     btn.setAttribute('role', 'radio');
     btn.setAttribute('aria-checked', c.id === state.color ? 'true' : 'false');
-    btn.innerHTML = '<span class="swatch-chip" style="background:' + c.chip + '"></span>' +
+    btn.innerHTML = (c.chip === 'other'
+        ? '<span class="swatch-chip is-other"></span>'
+        : '<span class="swatch-chip" style="background:' + c.chip + '"></span>') +
       '<span class="swatch-label">' + c.label + '</span>';
     btn.addEventListener('click', function () {
       state.color = c.id;
@@ -180,6 +186,10 @@ function buildControls() {
     colorList.appendChild(btn);
   });
   colorBlock.appendChild(colorList);
+  const colorDesc = document.createElement('p');
+  colorDesc.className = 'ctrl-desc';
+  colorDesc.id = 'colorDesc';
+  colorBlock.appendChild(colorDesc);
   wrap.appendChild(colorBlock);
 
   // 共通 + 製品ごとの選択肢
@@ -253,10 +263,14 @@ function renderPreview() {
   };
   img.src = variantSrc(state.product, state.color);
   img.alt = product().name + ' ' + colorObj().label;
-  caption.textContent = product().name + ' / ' + colorObj().label;
+  caption.textContent = state.color === 'other'
+    ? product().name + ' / その他の色（写真はナチュラルです）'
+    : product().name + ' / ' + colorObj().label;
 
   const cv = document.getElementById('colorValue');
   if (cv) cv.textContent = colorObj().label;
+  const cd = document.getElementById('colorDesc');
+  if (cd) cd.textContent = colorObj().desc || '';
 
   groups().forEach(function (g) {
     const el = document.querySelector('[data-value-for="' + g.key + '"]');
@@ -292,7 +306,7 @@ function renderConfirm() {
   }
 
   row('製品', product().name);
-  row('色', colorObj().label);
+  row('色', colorObj().label + (state.color === 'other' ? '（別途費用）' : ''));
   groups().forEach(function (g) { row(g.label, chosen(g.key).label); });
   if (product().size) {
     row(product().size.label, state.size ? state.size + ' ' + product().size.unit : '相談して決める');
@@ -307,8 +321,11 @@ document.getElementById('orderNote').addEventListener('input', function () {
 
 function specText() {
   const lines = ['VÉLF「' + product().name + '」のオーダーで相談したいです。', ''];
-  lines.push('色：' + colorObj().label);
-  groups().forEach(function (g) { lines.push(g.label + '：' + chosen(g.key).label); });
+  lines.push('色：' + colorObj().label + (state.color === 'other' ? '（別途費用の相談あり）' : ''));
+  groups().forEach(function (g) {
+    const o = chosen(g.key);
+    lines.push(g.label + '：' + o.label + (o.id === 'other' ? '（別途費用の相談あり）' : ''));
+  });
   if (product().size) {
     lines.push(product().size.label + '：' +
       (state.size ? state.size + ' ' + product().size.unit : '相談して決めたい'));

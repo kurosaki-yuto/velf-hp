@@ -447,3 +447,8 @@
   .product-grid { padding: 0 1.2rem; }
   .confirm { padding: 0 1.2rem; }
 }
+
+/* その他の色は見本を出せないので、多色のチップで示す */
+.swatch-chip.is-other {
+  background: conic-gradient(#1c1c1c, #3f2a1b, #8e2230, #3aa6b9, #d8b483, #1c1c1c);
+}
