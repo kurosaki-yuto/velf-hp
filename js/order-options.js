@@ -69,7 +69,7 @@ window.ORDER = {
         }
       ]
     },
-    { id: 'star_wallet', name: 'スタースタッズウォレット', base: 30000, cat: 'ウォレット' },
+    { id: 'star_wallet', name: 'スタースタッズウォレット', base: 12000, cat: 'ウォレット', tbd: true },
     { id: 'key_case', name: 'キーケース', base: 5000, cat: 'ケース' },
     { id: 'card_case', name: 'カードケース', base: 3980, cat: 'ケース' },
     { id: 'glasses_case_red', name: 'メガネケース', base: 5000, cat: 'ケース' },

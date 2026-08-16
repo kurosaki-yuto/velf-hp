@@ -739,3 +739,10 @@ ul { list-style: none; }
   .cd-num { font-size: 30px; }
   .cd-unit { min-width: 48px; }
 }
+
+.gift-note {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}

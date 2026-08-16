@@ -129,7 +129,8 @@ document.querySelectorAll('.step').forEach(function (el) {
       '<figure><img src="assets/img/' + p.id + '.jpg" alt="' + p.name + '" loading="lazy"></figure>' +
       '<span class="pcard-cat">' + p.cat + '</span>' +
       '<span class="pcard-name">' + p.name + '</span>' +
-      '<span class="pcard-price">¥' + p.base.toLocaleString() + '〜</span>';
+      '<span class="pcard-price">' +
+        (p.tbd ? '価格は準備中' : '¥' + p.base.toLocaleString() + '〜') + '</span>';
     card.addEventListener('click', function () { selectProduct(p.id); });
     grid.appendChild(card);
   });
@@ -350,7 +351,8 @@ function renderConfirm() {
     row(product().size.label, state.size ? state.size + ' ' + product().size.unit : '相談して決める');
   }
 
-  document.getElementById('specPrice').textContent = '¥' + total().toLocaleString();
+  document.getElementById('specPrice').textContent =
+    product().tbd ? 'お見積り' : '¥' + total().toLocaleString();
   renderBuyButton();
 }
 
@@ -398,7 +400,9 @@ function specText() {
   }
   if (state.note) lines.push('ご相談：' + state.note);
   lines.push('');
-  lines.push('サイト上の参考価格：¥' + total().toLocaleString());
+  lines.push(product().tbd
+    ? 'サイト上の参考価格：価格は準備中のため、お見積りをお願いします'
+    : 'サイト上の参考価格：¥' + total().toLocaleString());
   return lines.join('\n');
 }
 
