@@ -39,11 +39,11 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: splashOut 0.6s ease 1.7s both;
+  animation: splashOut 0.9s ease 2.1s both;
 }
 .splash img {
   width: min(420px, 70vw);
-  animation: stampIn 0.65s cubic-bezier(0.16, 1.1, 0.3, 1.3) 0.15s both;
+  animation: floatIn 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s both;
 }
 @keyframes splashOut {
   to { opacity: 0; visibility: hidden; }
@@ -206,22 +206,20 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.94);
-  animation: flashIn 0.25s ease both;
+  animation: flashIn 0.6s ease both;
 }
 .stamp-overlay img {
   width: min(440px, 68vw);
-  animation: stampIn 0.6s cubic-bezier(0.16, 1.1, 0.3, 1.3) both;
+  animation: floatIn 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 @keyframes flashIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-@keyframes stampIn {
-  0% { transform: scale(2.8); opacity: 0; }
-  50% { transform: scale(0.94); opacity: 1; }
-  68% { transform: scale(1.06); }
-  82% { transform: scale(0.99); }
-  100% { transform: scale(1); }
+@keyframes floatIn {
+  0% { transform: scale(1.06) translateY(10px); opacity: 0; filter: blur(6px); }
+  60% { opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
 }
 
 /* ---- tagline ---- */
@@ -692,4 +690,52 @@ ul { list-style: none; }
   .gift { padding: 4rem 1.2rem; }
   .tagline-actions { flex-direction: column; align-items: center; }
   .tagline-cta { width: min(280px, 100%); text-align: center; }
+}
+
+/* ---- countdown ---- */
+.countdown[hidden] { display: none; }
+.countdown {
+  margin-top: 2.2rem;
+  animation: floatIn 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s both;
+}
+.countdown-label {
+  font-size: 12px;
+  letter-spacing: 0.34em;
+  margin-right: -0.34em;
+  color: var(--ink-soft);
+  margin-bottom: 1.1rem;
+}
+.countdown-units {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+}
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 62px;
+}
+.cd-num {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.cd-cap {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
+  color: #9a9a9a;
+}
+
+@media (max-width: 640px) {
+  .countdown-units { gap: 1.3rem; }
+  .cd-num { font-size: 30px; }
+  .cd-unit { min-width: 48px; }
 }

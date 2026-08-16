@@ -55,14 +55,14 @@ if (heroVideo && stampOverlay) {
     stampOverlay.style.animation = '';
     img.style.animation = '';
     clearTimeout(stampTimer);
-    stampTimer = setTimeout(function () { stampOverlay.hidden = true; }, 2800);
+    stampTimer = setTimeout(function () { stampOverlay.hidden = true; }, 3400);
   });
 }
 
 // スプラッシュはアニメーション後に完全除去
 const splash = document.getElementById('splash');
 if (splash) {
-  setTimeout(function () { splash.remove(); }, 2500);
+  setTimeout(function () { splash.remove(); }, 3100);
 }
 
 // 商品カードクリックでDMメッセージをコピーしてInstagram DMを開く
@@ -202,4 +202,45 @@ if (reserveForm) {
       finish();
     }
   });
+}
+
+// ============ 全面スタートまでのカウントダウン ============
+// 8/20 から表示を始め、8/27 の0時（日本時間）に0になる。
+// 開始前でも ?countdown=preview を付ければ確認できる。
+const LAUNCH_AT = new Date('2026-08-27T00:00:00+09:00');
+const COUNTDOWN_FROM = new Date('2026-08-20T00:00:00+09:00');
+
+const countdown = document.getElementById('countdown');
+
+if (countdown) {
+  const preview = new URLSearchParams(location.search).get('countdown') === 'preview';
+
+  function tick() {
+    const now = new Date();
+    const left = LAUNCH_AT - now;
+
+    if (left <= 0) {
+      countdown.hidden = true;
+      return true;
+    }
+    if (!preview && now < COUNTDOWN_FROM) {
+      countdown.hidden = true;
+      return false;
+    }
+
+    countdown.hidden = false;
+    const sec = Math.floor(left / 1000);
+    const pad = function (n) { return String(n).padStart(2, '0'); };
+    document.getElementById('cdDays').textContent = Math.floor(sec / 86400);
+    document.getElementById('cdHours').textContent = pad(Math.floor(sec / 3600) % 24);
+    document.getElementById('cdMins').textContent = pad(Math.floor(sec / 60) % 60);
+    document.getElementById('cdSecs').textContent = pad(sec % 60);
+    return false;
+  }
+
+  if (!tick()) {
+    const timer = setInterval(function () {
+      if (tick()) clearInterval(timer);
+    }, 1000);
+  }
 }
