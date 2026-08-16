@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>オーダーをつくる | VÉLF</title>
+<meta name="description" content="VÉLF（ヴェルフ）のオーダーシミュレーション。革・色・幅・バックル・ステッチを選んで、あなたの一本を組み立てます。">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/order.css">
+</head>
+<body>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<header class="site-header">
+  <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="index.html" aria-label="VÉLF ホーム">
+    <span class="brand-name">V&Eacute;LF</span>
+  </a>
+  <span class="header-spacer" aria-hidden="true"></span>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<nav class="drawer" id="drawer" aria-label="メインメニュー" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="メニューを閉じる">&times;</button>
+  <a href="index.html">ホーム</a>
+  <a href="order.html">オーダーをつくる</a>
+  <a href="index.html#reserve">先行案内リスト</a>
+  <a href="index.html#gift">贈り物として</a>
+  <a href="about.html">ブランドについて</a>
+  <a href="contact.html">お問い合わせ</a>
+  <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<main class="order-page">
+
+  <section class="order-intro">
+    <p class="order-eyebrow">Order Simulation</p>
+    <h1 class="order-h1">オーダーをつくる</h1>
+    <p class="order-lead">
+      革、色、幅、バックル、糸。<br>
+      選んだ組み合わせが、そのまま一本の仕様書になります。
+    </p>
+  </section>
+
+  <div class="builder">
+
+    <div class="builder-preview">
+      <div class="preview-sticky">
+        <svg class="belt-svg" viewBox="0 0 900 280" role="img" aria-labelledby="beltSvgTitle">
+          <title id="beltSvgTitle">選んだ仕様のベルト図</title>
+
+          <!-- 本体（ベルト） -->
+          <g id="strapGroup">
+            <path id="strapBody" d="" fill="var(--leather)"></path>
+            <path id="strapShade" d="" fill="rgba(0,0,0,0.16)"></path>
+            <path id="strapStitchTop" d="" fill="none" stroke="var(--stitch)" stroke-width="2.4"
+                  stroke-dasharray="9 7" stroke-linecap="round"></path>
+            <path id="strapStitchBottom" d="" fill="none" stroke="var(--stitch)" stroke-width="2.4"
+                  stroke-dasharray="9 7" stroke-linecap="round"></path>
+            <g id="holes" fill="rgba(0,0,0,0.55)"></g>
+          </g>
+
+          <!-- 剣先の折り返し部分 -->
+          <g id="keeperGroup">
+            <rect id="keeper" rx="3" fill="var(--leather)" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"></rect>
+          </g>
+
+          <!-- バックル -->
+          <g id="buckleGroup">
+            <rect id="buckleFrame" rx="6" fill="none" stroke="var(--buckle)" stroke-width="14"></rect>
+            <rect id="bucklePin" fill="var(--buckle)"></rect>
+            <path id="buckleTongue" fill="var(--buckle)"></path>
+          </g>
+        </svg>
+
+        <p class="preview-note">
+          実物の色味・質感を再現した画像ではありません。仕様を確かめるための図です。<br>
+          革は天然素材のため、同じ色でも一枚ごとに表情が変わります。
+        </p>
+      </div>
+    </div>
+
+    <div class="builder-controls" id="builderControls"></div>
+
+  </div>
+
+  <section class="spec" id="spec">
+    <h2 class="spec-title">あなたの仕様</h2>
+    <dl class="spec-list" id="specList"></dl>
+
+    <div class="spec-price">
+      <span class="spec-price-label">参考価格</span>
+      <span class="spec-price-value" id="specPrice">&yen;15,000</span>
+    </div>
+    <p class="spec-price-note">
+      価格は仮のものです。サイズや革の状態によって変わるため、確定金額はご相談のうえでお出しします。
+    </p>
+
+    <div class="spec-flow">
+      <ol>
+        <li><span>1</span>この仕様でご相談ください</li>
+        <li><span>2</span>オンラインで15分ほど、仕様とサイズをすり合わせます</li>
+        <li><span>3</span>内容が固まったら、お見積りとお支払いのご案内をお送りします</li>
+        <li><span>4</span>製作に入ります</li>
+      </ol>
+    </div>
+
+    <button type="button" class="spec-cta" id="specCta">この仕様で相談する</button>
+    <p class="spec-cta-note">Instagram の DM が開きます。仕様書は自動でコピーされるので、貼り付けて送ってください。</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="assets/img/logo_symbol.png" alt="" class="footer-mark">
+  <nav class="footer-nav" aria-label="フッターナビゲーション">
+    <a href="index.html">ホーム</a>
+    <a href="order.html">オーダーをつくる</a>
+    <a href="about.html">ブランドについて</a>
+    <a href="contact.html">お問い合わせ</a>
+    <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+  <p class="copyright">&copy; 2026 V&Eacute;LF</p>
+</footer>
+
+<script src="js/order-options.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>

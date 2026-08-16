@@ -40,6 +40,9 @@
 <nav class="drawer" id="drawer" aria-label="メインメニュー" aria-hidden="true">
   <button class="drawer-close" id="drawerClose" aria-label="メニューを閉じる">&times;</button>
   <a href="index.html">ホーム</a>
+  <a href="order.html">オーダーをつくる</a>
+  <a href="index.html#reserve">先行案内リスト</a>
+  <a href="index.html#gift">贈り物として</a>
   <a href="about.html">ブランドについて</a>
   <a href="contact.html">お問い合わせ</a>
   <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>
@@ -60,7 +63,10 @@
     <p class="tagline-copy">縁をかたちに。</p>
     <img class="tagline-script" src="assets/img/confidence_script.png" alt="Confidence rooted in gratitude.">
     <p class="launch-date">2026.8.27 全面スタート</p>
-    <a class="tagline-cta" href="#products">製品を見る</a>
+    <div class="tagline-actions">
+      <a class="tagline-cta tagline-cta--primary" href="#reserve">先行案内を受け取る</a>
+      <a class="tagline-cta" href="#products">製品を見る</a>
+    </div>
   </section>
 
   <section class="products" id="products">
@@ -72,13 +78,13 @@
           <figure><img src="assets/img/belt_black.jpg" alt="レザーベルト 黒" loading="lazy"></figure>
           <h3 class="card-name">レザーベルト</h3>
           <p class="card-price">&yen;15,000</p>
-          <a class="card-cta" href="https://ig.me/m/velf.__jp" target="_blank" rel="noopener">オーダー相談</a>
+          <a class="card-cta" href="order.html">オーダーをつくる</a>
         </li>
         <li class="card">
           <figure><img src="assets/img/belt_horseshoe.jpg" alt="蹄鉄バックルのレザーベルト" loading="lazy"></figure>
           <h3 class="card-name">蹄鉄バックルベルト</h3>
           <p class="card-price">&yen;19,000</p>
-          <a class="card-cta" href="https://ig.me/m/velf.__jp" target="_blank" rel="noopener">オーダー相談</a>
+          <a class="card-cta" href="order.html">オーダーをつくる</a>
         </li>
       </ul>
     </div>
@@ -164,6 +170,62 @@
     <p class="products-note">すべて一点ずつの手縫い仕立てのため、受注製作にて承ります。</p>
   </section>
 
+  <section class="reserve" id="reserve">
+    <p class="reserve-eyebrow">2026.8.27 ローンチ</p>
+    <h2 class="reserve-title">先行案内リスト</h2>
+    <p class="reserve-text">
+      初回の製作分は数がごく限られます。<br>
+      ご登録いただいた方には、一般公開より先にご案内します。
+    </p>
+    <form class="reserve-form" id="reserveForm" novalidate>
+      <div class="field">
+        <label for="reserveEmail">メールアドレス<span class="req">必須</span></label>
+        <input type="email" id="reserveEmail" name="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="reserveName">お名前</label>
+        <input type="text" id="reserveName" name="name" autocomplete="name" placeholder="任意">
+      </div>
+      <div class="field">
+        <label for="reserveItem">気になっている製品</label>
+        <select id="reserveItem" name="item">
+          <option value="">選択しない</option>
+        </select>
+      </div>
+      <button type="submit" class="reserve-btn">先行案内を受け取る</button>
+      <p class="reserve-note">ご登録は無料です。ローンチ案内以外の配信はしません。いつでも解除できます。</p>
+    </form>
+    <p class="reserve-done" id="reserveDone" hidden>
+      ご登録ありがとうございます。<br>8月27日のローンチ前に、先行してご案内します。
+    </p>
+  </section>
+
+  <section class="gift" id="gift">
+    <h2 class="gift-title">贈り物として</h2>
+    <p class="gift-lead">
+      使うほどに色が変わる革は、<br>
+      渡したあとの時間まで含めて贈り物になります。
+    </p>
+    <ul class="gift-list">
+      <li class="gift-item">
+        <p class="gift-range">〜10,000円</p>
+        <p class="gift-pick">キーケース / カードケース / ミニバッグチャーム</p>
+        <p class="gift-for">はじめての贈り物、お礼に。</p>
+      </li>
+      <li class="gift-item">
+        <p class="gift-range">10,000〜20,000円</p>
+        <p class="gift-pick">レザーベルト / ウォッチバンド / ウエストポーチ</p>
+        <p class="gift-for">誕生日、記念日に。</p>
+      </li>
+      <li class="gift-item">
+        <p class="gift-range">20,000円〜</p>
+        <p class="gift-pick">トラッカーウォレット / スタースタッズウォレット</p>
+        <p class="gift-for">節目の贈り物に。</p>
+      </li>
+    </ul>
+    <a class="gift-cta" href="#reserve">先行案内を受け取る</a>
+  </section>
+
   <section class="editorial">
     <figure class="editorial-item">
       <img src="assets/img/case_collection.jpg" alt="色違いのレザーケースが並ぶ様子" loading="lazy">
@@ -181,11 +243,11 @@
 
 
 </main>
-
 <footer class="site-footer">
   <img src="assets/img/logo_symbol.png" alt="" class="footer-mark">
   <nav class="footer-nav" aria-label="フッターナビゲーション">
     <a href="index.html">ホーム</a>
+    <a href="order.html">オーダーをつくる</a>
     <a href="about.html">ブランドについて</a>
     <a href="contact.html">お問い合わせ</a>
     <a href="https://www.instagram.com/velf.__jp" target="_blank" rel="noopener">Instagram</a>

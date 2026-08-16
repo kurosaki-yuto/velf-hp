@@ -495,3 +495,201 @@ ul { list-style: none; }
   .order { padding: 4.5rem 1.2rem; }
   .order-btn { padding: 1rem 2.6rem; }
 }
+
+/* ---- tagline actions ---- */
+.tagline-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.tagline-cta--primary {
+  background: var(--ink);
+  color: #ffffff;
+}
+.tagline-cta--primary:hover { background: #ffffff; color: var(--ink); }
+
+/* ---- reserve ---- */
+.reserve {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem 5rem;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.reserve-eyebrow {
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  color: var(--ink-soft);
+}
+.reserve-title {
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.4em;
+  margin: 1rem 0 1.6rem;
+  margin-right: -0.4em;
+}
+.reserve-text {
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--ink-soft);
+  margin-bottom: 2.6rem;
+}
+.reserve-form { text-align: left; }
+.field { margin-bottom: 1.4rem; }
+.field label,
+.field .field-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  margin-bottom: 0.5rem;
+  color: var(--ink-soft);
+}
+.field .req {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--line);
+  padding: 0.1rem 0.4rem;
+  color: var(--ink-soft);
+}
+.field input[type="email"],
+.field input[type="text"],
+.field select {
+  width: 100%;
+  font-family: var(--gothic);
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 0.7rem 0.1rem;
+  transition: border-color 0.3s ease;
+  appearance: none;
+}
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-bottom-color: var(--ink);
+}
+.field input.is-error { border-bottom-color: #c0392b; }
+.field select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+    linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 55%, calc(100% - 7px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0.4rem 0 2rem;
+  cursor: pointer;
+}
+.check input { accent-color: var(--ink); }
+.reserve-btn {
+  display: block;
+  width: 100%;
+  font-family: var(--gothic);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  color: #ffffff;
+  background: var(--band);
+  border: 1px solid var(--band);
+  padding: 1.05rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.reserve-btn:hover { opacity: 0.75; }
+.reserve-btn[disabled] { opacity: 0.4; cursor: default; }
+.reserve-note {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #8a8a8a;
+  margin-top: 1.2rem;
+  text-align: center;
+}
+.reserve-done[hidden] { display: none; }
+.reserve-done {
+  font-size: 14px;
+  line-height: 2.2;
+  animation: fadeUp 0.8s ease both;
+}
+
+/* ---- gift ---- */
+.gift {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.gift-title {
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.4em;
+  margin-right: -0.4em;
+  margin-bottom: 1.6rem;
+}
+.gift-lead {
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--ink-soft);
+  margin-bottom: 3.4rem;
+}
+.gift-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  text-align: left;
+  margin-bottom: 3.4rem;
+}
+.gift-item {
+  border-top: 1px solid var(--ink);
+  padding-top: 1.2rem;
+}
+.gift-range {
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.8rem;
+}
+.gift-pick {
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 0.6rem;
+}
+.gift-for {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.gift-cta {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  padding: 0.9rem 3rem;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.gift-cta:hover { background: var(--ink); color: #ffffff; }
+
+@media (max-width: 900px) {
+  .gift-list { grid-template-columns: 1fr; gap: 1.4rem; }
+}
+
+@media (max-width: 640px) {
+  .reserve { padding: 4rem 1.2rem; }
+  .gift { padding: 4rem 1.2rem; }
+  .tagline-actions { flex-direction: column; align-items: center; }
+  .tagline-cta { width: min(280px, 100%); text-align: center; }
+}

@@ -80,7 +80,18 @@ function showToast(message) {
 
 document.querySelectorAll('.card').forEach(function (card) {
   card.style.cursor = 'pointer';
+  const cta = card.querySelector('.card-cta');
+  const internal = cta && !/^https?:/.test(cta.getAttribute('href'));
+
   card.addEventListener('click', function (e) {
+    if (e.target.closest('a')) return;
+
+    // シミュレーターがある製品は、DMではなくそちらへ送る
+    if (internal) {
+      location.href = cta.getAttribute('href');
+      return;
+    }
+
     const nameEl = card.querySelector('.card-name');
     const name = nameEl ? nameEl.textContent.trim() : '';
     const msg = '「' + name + '」の件でオーダー相談したいです。';
@@ -88,9 +99,7 @@ document.querySelectorAll('.card').forEach(function (card) {
       navigator.clipboard.writeText(msg).catch(function () {});
     }
     showToast('相談メッセージをコピーしました。開いたDMに貼り付けて送ってください');
-    if (!e.target.closest('a')) {
-      window.open(IG_DM, '_blank', 'noopener');
-    }
+    window.open(IG_DM, '_blank', 'noopener');
   });
 });
 
@@ -115,4 +124,82 @@ if ('IntersectionObserver' in window && cards.length) {
   });
 } else {
   cards.forEach(function (card) { card.classList.add('is-visible'); });
+}
+
+// ============ 先行案内リスト ============
+// 送信先。Google Apps Script の Web App URL などを入れると有効になる。
+// 空のままだと登録内容を Instagram DM へ引き渡すフォールバックで動く。
+const RESERVE_ENDPOINT = '';
+
+const reserveForm = document.getElementById('reserveForm');
+const reserveDone = document.getElementById('reserveDone');
+const reserveItem = document.getElementById('reserveItem');
+
+// 製品名のセレクトを商品一覧から自動生成（商品が増えても直さなくていい）
+if (reserveItem) {
+  document.querySelectorAll('.card-name').forEach(function (el) {
+    const opt = document.createElement('option');
+    opt.value = el.textContent.trim();
+    opt.textContent = el.textContent.trim();
+    reserveItem.appendChild(opt);
+  });
+}
+
+if (reserveForm) {
+  reserveForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const emailEl = document.getElementById('reserveEmail');
+    const email = emailEl.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!valid) {
+      emailEl.classList.add('is-error');
+      showToast('メールアドレスをご確認ください');
+      emailEl.focus();
+      return;
+    }
+    emailEl.classList.remove('is-error');
+
+    const payload = {
+      email: email,
+      name: document.getElementById('reserveName').value.trim(),
+      item: reserveItem.value,
+      source: location.pathname,
+      at: new Date().toISOString()
+    };
+
+    const btn = reserveForm.querySelector('.reserve-btn');
+    btn.disabled = true;
+
+    function finish() {
+      reserveForm.hidden = true;
+      reserveDone.hidden = false;
+      reserveDone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    if (RESERVE_ENDPOINT) {
+      fetch(RESERVE_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(finish).catch(function () {
+        btn.disabled = false;
+        showToast('送信できませんでした。時間をおいてお試しください');
+      });
+    } else {
+      // 送信先が未設定の間は DM に内容を引き渡す
+      const msg =
+        '先行案内リストに登録したいです。\n' +
+        'メール: ' + payload.email +
+        (payload.name ? '\nお名前: ' + payload.name : '') +
+        (payload.item ? '\n気になっている製品: ' + payload.item : '');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).catch(function () {});
+      }
+      showToast('登録内容をコピーしました。開いたDMに貼り付けて送ってください');
+      window.open(IG_DM, '_blank', 'noopener');
+      finish();
+    }
+  });
 }
