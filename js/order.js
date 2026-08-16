@@ -130,7 +130,7 @@ document.querySelectorAll('.step').forEach(function (el) {
       '<span class="pcard-cat">' + p.cat + '</span>' +
       '<span class="pcard-name">' + p.name + '</span>' +
       '<span class="pcard-price">' +
-        (p.tbd ? '価格は準備中' : '¥' + p.base.toLocaleString() + '〜') + '</span>';
+        (p.tbd ? 'ご相談時にお見積り' : '¥' + p.base.toLocaleString() + '〜') + '</span>';
     card.addEventListener('click', function () { selectProduct(p.id); });
     grid.appendChild(card);
   });
@@ -352,7 +352,7 @@ function renderConfirm() {
   }
 
   document.getElementById('specPrice').textContent =
-    product().tbd ? 'お見積り' : '¥' + total().toLocaleString();
+    product().tbd ? 'ご相談時にお見積り' : '¥' + total().toLocaleString();
   renderBuyButton();
 }
 
