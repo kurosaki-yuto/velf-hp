@@ -351,6 +351,25 @@ function renderConfirm() {
   }
 
   document.getElementById('specPrice').textContent = '¥' + total().toLocaleString();
+  renderBuyButton();
+}
+
+// 決済リンクは金額が固定なので、追加料金が出る組み合わせでは出さない。
+// そのときは DM 相談だけにして、金額を詰めてから請求リンクを送る運用にする。
+function renderBuyButton() {
+  const buy = document.getElementById('specBuy');
+  const note = document.getElementById('specBuyNote');
+  if (!buy) return;
+
+  const links = window.PAYMENT_LINKS || {};
+  const url = links[state.product];
+  const hasOther = state.color === 'other' ||
+    groups().some(function (g) { return chosen(g.key).other === true; });
+
+  const show = Boolean(url) && !hasOther;
+  buy.hidden = !show;
+  note.hidden = !show;
+  if (show) buy.href = url;
 }
 
 document.getElementById('orderNote').addEventListener('input', function () {

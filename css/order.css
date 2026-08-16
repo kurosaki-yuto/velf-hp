@@ -481,3 +481,71 @@
   color: var(--ink);
   margin-top: 0.5rem;
 }
+
+/* 決済リンクが入っている商品にだけ出る購入ボタン */
+.spec-buy[hidden] { display: none; }
+.spec-buy {
+  display: block;
+  width: 100%;
+  font-family: var(--gothic);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  text-align: center;
+  color: #ffffff;
+  background: var(--band);
+  border: 1px solid var(--band);
+  padding: 1.05rem 1rem;
+  transition: opacity 0.3s ease;
+}
+.spec-buy:hover { opacity: 0.75; }
+.spec-buy-note[hidden] { display: none; }
+.spec-buy-note {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #8a8a8a;
+  margin: 1rem 0 2rem;
+}
+/* 購入ボタンが出ているときは、相談ボタンを控えめにする */
+.spec-buy:not([hidden]) ~ .spec-cta {
+  color: var(--ink);
+  background: none;
+  border-color: var(--line);
+}
+
+/* DMへの送り方。読み飛ばされると仕様書が届かないので、はっきり出す */
+.dm-guide {
+  border: 1px solid var(--ink);
+  padding: 1.2rem 1.3rem;
+  margin: 0 0 1.2rem;
+  text-align: left;
+}
+.dm-guide-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  margin-bottom: 0.9rem;
+}
+.dm-guide-steps { list-style: none; }
+.dm-guide-steps li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-size: 13.5px;
+  line-height: 1.9;
+  padding: 0.25rem 0;
+}
+.dm-guide-steps li span {
+  font-family: var(--serif);
+  font-size: 12px;
+  color: #ffffff;
+  background: var(--ink);
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.dm-guide-steps strong { font-weight: 500; border-bottom: 1px solid var(--ink); }

@@ -1,0 +1,72 @@
+/* ---- 特商法表記 ---- */
+.legal {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5rem;
+}
+.legal-title {
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.legal-draft {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  padding: 1rem 1.2rem;
+  margin-bottom: 2.6rem;
+}
+.legal-list {
+  border-top: 1px solid var(--line);
+}
+.legal-list > div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1.1rem 0.2rem;
+}
+.legal-list dt {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+.legal-list dd {
+  font-size: 14px;
+  line-height: 1.9;
+}
+.todo {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #b03a2b;
+  border: 1px solid #e0bdb7;
+  padding: 0.05rem 0.5rem;
+}
+.legal-subtitle {
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.24em;
+  margin-right: -0.24em;
+  margin: 3rem 0 1.2rem;
+}
+.legal-text {
+  font-size: 14px;
+  line-height: 2.1;
+  color: var(--ink-soft);
+}
+.legal-back {
+  margin-top: 3.5rem;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+.legal-back a { border-bottom: 1px solid var(--ink); }
+
+@media (max-width: 640px) {
+  .legal { padding: 3rem 1.2rem 4rem; }
+  .legal-list > div { grid-template-columns: 1fr; gap: 0.4rem; }
+}
