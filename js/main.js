@@ -205,16 +205,12 @@ if (reserveForm) {
 }
 
 // ============ 全面スタートまでのカウントダウン ============
-// 8/20 から表示を始め、8/27 の0時（日本時間）に0になる。
-// 開始前でも ?countdown=preview を付ければ確認できる。
+// 8/27 の0時（日本時間）に0になる。ローンチまで常時表示する。
 const LAUNCH_AT = new Date('2026-08-27T00:00:00+09:00');
-const COUNTDOWN_FROM = new Date('2026-08-20T00:00:00+09:00');
 
 const countdown = document.getElementById('countdown');
 
 if (countdown) {
-  const preview = new URLSearchParams(location.search).get('countdown') === 'preview';
-
   function tick() {
     const now = new Date();
     const left = LAUNCH_AT - now;
@@ -223,11 +219,6 @@ if (countdown) {
       countdown.hidden = true;
       return true;
     }
-    if (!preview && now < COUNTDOWN_FROM) {
-      countdown.hidden = true;
-      return false;
-    }
-
     countdown.hidden = false;
     const sec = Math.floor(left / 1000);
     const pad = function (n) { return String(n).padStart(2, '0'); };

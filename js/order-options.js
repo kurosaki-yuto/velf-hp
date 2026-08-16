@@ -100,7 +100,6 @@ window.ORDER = {
     { id: 'watch_band', name: 'ウォッチバンド', base: 12000, cat: '小物',
       size: { label: 'ラグ幅', unit: 'mm', placeholder: '例：20', min: 12, max: 30,
               note: '時計側の取り付け幅。分からなければ機種名をご相談時にお知らせください。' } },
-    { id: 'bag_charm', name: 'ミニバッグチャーム', base: 5500, cat: '小物' },
     { id: 'leather_sleeve', name: 'レザースリーブ', base: 4500, cat: '小物' }
   ]
 };
