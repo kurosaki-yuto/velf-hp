@@ -549,3 +549,26 @@
   flex-shrink: 0;
 }
 .dm-guide-steps strong { font-weight: 500; border-bottom: 1px solid var(--ink); }
+
+/* プレビューにステッチの色を出す。糸の色は写真では変わらないので、
+   選んだ色をチップで明示して仕様の取り違えを防ぐ。 */
+.preview-stitch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #6a6a6a;
+  margin-top: 0.55rem;
+}
+.preview-stitch.is-center { justify-content: center; margin-top: 1rem; }
+.preview-stitch .stitch-chip {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  flex: none;
+}
+.preview-stitch .stitch-chip.is-other {
+  background: conic-gradient(#1c1c1c, #e6dcc8, #3aa6b9, #3f2a1b, #1c1c1c);
+}

@@ -70,6 +70,30 @@ function colorObj() {
   return DATA.colors.find(function (c) { return c.id === state.color; });
 }
 
+function escapeText(str) {
+  return String(str).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+}
+
+// 糸の色は写真に出ない。選んだステッチを画像の下にチップと文字で出して、
+// 仕様の取り違えを防ぐ。
+function renderStitchLine(el) {
+  if (!el) return;
+  const g = groups().find(function (x) { return x.key === 'stitch'; });
+  if (!g) { el.hidden = true; return; }
+  const o = chosen('stitch');
+  const label = o.other
+    ? (state.otherText.stitch || 'その他の色') + '（ご相談）'
+    : o.label;
+  const chipClass = 'stitch-chip' + (o.chip === 'other' ? ' is-other' : '');
+  const chipStyle = (o.chip && o.chip !== 'other')
+    ? ' style="background:' + escapeText(o.chip) + '"' : '';
+  el.innerHTML = '<span class="' + chipClass + '"' + chipStyle + '></span>' +
+    '<span>ステッチ：' + escapeText(label) + '</span>';
+  el.hidden = false;
+}
+
 function variantSrc(productId, colorId) {
   return 'assets/img/variants/' + productId + '_' + colorId + '.jpg';
 }
@@ -248,7 +272,7 @@ function buildControls() {
     });
     block.appendChild(list);
 
-    const other = otherField(group.key);
+    const other = otherField(group.key, renderPreview);
     other.dataset.otherFor = group.key;
     block.appendChild(other);
 
@@ -310,6 +334,8 @@ function renderPreview() {
     const d = document.querySelector('[data-desc-for="' + g.key + '"]');
     if (d) d.textContent = chosen(g.key).desc || '';
   });
+
+  renderStitchLine(document.getElementById('previewStitch'));
 }
 
 // ---- ステップ3: 確認 ----
@@ -327,6 +353,8 @@ function renderConfirm() {
   };
   img.src = variantSrc(state.product, state.color);
   img.alt = product().name + ' ' + colorObj().label;
+
+  renderStitchLine(document.getElementById('confirmStitch'));
 
   const list = document.getElementById('specList');
   list.innerHTML = '';
